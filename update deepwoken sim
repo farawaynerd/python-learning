@@ -3,74 +3,77 @@ import random
 import itertools
 
 class amog():
-    def __init__(self, fighters):
+  
+    def __init__(self):
+        self.frostdraw = {
+          "frostdraw": 0,
+          "ice_forge": (60.25, 3.6),
+          "ice_lance": (60.25, 0),
+          "ice_daggers": (34.25, 1.2),
+          "crystal_impale": (54.225, 3.6)
+        }
+        self.flamecharm = {
+          "flamecharm": 0,
+          "fireforge": (51.4, ),
+          "ashslam": (70.5, ),
+          "risingflame": (24.1, ),
+          "fireblade": (19, )
+        }
+        #dummy posture values except for shadowgun
+        self.shadowcast = {
+          "shadowcast": 0,
+          "shadebringer": (42.03, 2),
+          "shadowgun": (37.36, 18),
+          "shadoweruption": (18.68, 2),
+          "eclipsekick": (93.4, 2)
+        }
+        self.galebreathe = {
+          "galebreathe": 0,
+          "galelunge": (28.02, 5.76),
+          "risingwind": (56.04, 5.52),
+          "astralwind": (70.05, 7.2),
+          "windcarve": (98.07, 8.64)
+        }
+        #dummy values
+        self.thundercall = {
+          "thundercall": 0,
+          "thunderkick": (1, 2),
+          "risingthunder": (1, 2),
+          "grandjavelin": (1, 2),
+          "stormblades": (1, 2)
+        }
+        self.choice = [self.thundercall,self.flamecharm,self.galebreathe,self.frostdraw,self.shadowcast]
         self.posture1 = 25
         self.posture2 = 25
         self.connect = True
         self.parry = False
-        self.choices = fighters
         self.tested = []
         self.checker()
         self.p1 = 450
         self.p2 = 450
 
     def checker(self):
-      for fight in itertools.combinations(self.choices, 2):
-        self.pick = list(fight)
+      for fight in itertools.combinations(self.choice, 2):
+        for c in itertools.combinations(self.choice, 2):
+          if c not in fight:
+            self.pick = list(fight)
+        self.tested = list(self.tested)
         if fight in self.tested:
           pass
-        while self.pick in self.tested:
-          self.pick = random.sample(self.choices, 2)
-          self.tested.append(self.pick)
-          print(self.pick)
-      self.fighting()
-  
-    def fighting(self):
+        else:
+          for i, x in enumerate(self.pick):
+              if x == self.frostdraw:
+                  self.pick[i] = "frostdraw"
+              elif x == self.thundercall:
+                  self.pick[i] = "thundercall"
+              elif x == self.shadowcast:
+                  self.pick[i] = "shadowcast"
+              elif x == self.galebreathe:
+                  self.pick[i] = "galebreathe"
+              else:
+                  self.pick[i] = "flamecharm"
+        self.tested.append(self.pick)
+
+        print(self.pick)
         
-        pass
-
-frostdraw = {
-  "frostdraw": 0,
-  "ice_forge": (60.25, 3.6),
-  "ice_lance": (60.25, 0),
-  "ice_daggers": (34.25, 1.2),
-  "crystal_impale": (54.225, 3.6)
-}
-
-flamecharm = {
-  "flamecharm": 0,
-  "fireforge": (51.4, ),
-  "ashslam": (70.5, ),
-  "risingflame": (24.1, ),
-  "fireblade": (19, )
-}
-
-#dummy posture values except for shadowgun
-shadowcast = {
-  "shadowcast": 0,
-  "shadebringer": (42.03, 2),
-  "shadowgun": (37.36, 18),
-  "shadoweruption": (18.68, 2),
-  "eclipsekick": (93.4, 2)
-}
-
-galebreathe = {
-  "galebreathe": 0,
-  "galelunge": (28.02, 5.76),
-  "risingwind": (56.04, 5.52),
-  "astralwind": (70.05, 7.2),
-  "windcarve": (98.07, 8.64)
-}
-
-#dummy values
-thundercall = {
-  "thundercall": 0,
-  "thunderkick": (1, 2),
-  "risingthunder": (1, 2),
-  "grandjavelin": (1, 2),
-  "stormblades": (1, 2)
-}
-
-fighters = (frostdraw, thundercall, flamecharm, shadowcast, galebreathe)
-
-fit = amog(fighters)
+fit = amog()
