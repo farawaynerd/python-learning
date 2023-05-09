@@ -47,34 +47,40 @@ class amog():
         self.posture1 = 25
         self.posture2 = 25
         self.connect = True
-        self.parry = False
         self.tested = []
+        self.parry = False
         self.checker()
         self.p1 = 450
         self.p2 = 450
 
-    def checker(self):
-      for fight in itertools.combinations(self.choice, 2):
-        for c in itertools.combinations(self.choice, 2):
-          if c not in fight:
-            self.pick = list(fight)
-        self.tested = list(self.tested)
-        if fight in self.tested:
-          pass
-        else:
-          for i, x in enumerate(self.pick):
-              if x == self.frostdraw:
-                  self.pick[i] = "frostdraw"
-              elif x == self.thundercall:
-                  self.pick[i] = "thundercall"
-              elif x == self.shadowcast:
-                  self.pick[i] = "shadowcast"
-              elif x == self.galebreathe:
-                  self.pick[i] = "galebreathe"
-              else:
-                  self.pick[i] = "flamecharm"
-        self.tested.append(self.pick)
+    def fight(self):
+        print(self.tested)
+        def fighta():
+            pass
+        def fightb():
+            pass
 
-        print(self.pick)
-        
+    def checker(self):
+      self.newlist = []
+      for fight in itertools.combinations(self.choice, 2):
+          self.pick = list(fight)
+          self.tested = list(self.tested)
+          if fight in self.tested:
+              pass
+          else:
+              for i, x in enumerate(self.pick):
+                  if x == self.frostdraw:
+                      self.pick[i] = "frostdraw"
+                  elif x == self.thundercall:
+                      self.pick[i] = "thundercall"
+                  elif x == self.shadowcast:
+                      self.pick[i] = "shadowcast"
+                  elif x == self.galebreathe:
+                      self.pick[i] = "galebreathe"
+                  else:
+                      self.pick[i] = "flamecharm"
+          self.newlist.append(self.pick)
+          print(self.newlist)
+          self.fight()
+
 fit = amog()
